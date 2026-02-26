@@ -121,6 +121,19 @@ const DOMAINS = [
     }
 ];
 
+const INDUSTRIES = [
+    { title: "Pharmaceutical & life sciences (clean rooms, validated processes)", img: "../assets/industries/pharma.png" },
+    { title: "Data centers & critical commercial facilities", img: "../assets/industries/datacenter.png" },
+    { title: "Healthcare & hospital campuses", img: "../assets/industries/hospital.png" },
+    { title: "Airports & transport infrastructure", img: "../assets/industries/airport.png" },
+    { title: "Financial services & regulated enterprises (auditability, controlled workflows)", img: "../assets/industries/financial.png" },
+    { title: "Security-sensitive enterprise environments", img: "../assets/industries/security.png" },
+    { title: "Industrial sites with strict compliance workflows", img: "../assets/industries/industrial.png" },
+    { title: "Large commercial real estate & multi-site campuses", img: "../assets/industries/commercial.png" },
+    { title: "Manufacturing & logistics facilities", img: "../assets/industries/logistic.png" },
+    { title: "Retail and distribution complexes", img: "../assets/industries/retail.png" },
+];
+
 const DOMAINS_VIEW = DOMAINS.map(d => ({
     ...d,
     blocks: d.blocks.map((b, i) => ({
@@ -272,6 +285,68 @@ const template = html`
                     </section>
                 `
         )}
+
+        <!-- WHO WE SUPPORT -->
+        <section class="section" id="support-intro">
+            <bw-feature
+                    img-src="../assets/industries/selection.png"
+                    img-alt="Industries overview"
+                    large-title="Who we support"
+                    medium-title="Built for operations where compliance is demanding and downtime is costly"
+                    compact
+                    image-right
+            >
+            </bw-feature>
+
+            <bw-card-grid cols="5">
+                ${repeat(
+                        () => INDUSTRIES,
+                        html`
+                            <bw-card
+                                    img-src="${i => i.img}"
+                                    img-alt="${i => i.title}"
+                                    title="${i => i.title}"
+                            ></bw-card>
+                        `
+                )}
+            </bw-card-grid>
+        </section>
+
+        <!-- TECHNICAL SCOPING & DISCOVERY / CONTACT -->
+        <section id="contact">
+            <bw-feature
+                    img-src="../assets/Technical_Scoping.png"
+                    img-alt="Technical scoping illustration"
+                    large-title="Technical Scoping & Discovery"
+                    medium-title="Bring us the workflow. We’ll scope the integration."
+                    image-right
+                    muted-bg
+            >
+                <p slot="body"> Enterprise building ecosystems require careful scoping before integration begins.</p>
+                <p slot="body">In a technical scoping session we:</p>
+                <ul slot="body">
+                    <li>review the operational workflow</li>
+                    <li>assess interfaces and constraints across the stack</li>
+                    <li>identify likely failure modes before anything is built</li>
+                    <li>select the right layer (API/SDK, middleware, database, protocol, or physical)</li>
+                    <li>define a safe, supportable path to delivery</li>
+                </ul>
+
+                <div class="contact-box">
+                    <div class="contact-title">Contact</div>
+                    <p class="contact-line">Email: <span class="mono">hello@buildwaresolutions.example</span></p>
+                    <p class="contact-line">Location: Australia (remote-first)</p>
+                </div>
+
+                <button class="bw-btn" slot="body">Book a Technical Scoping Meeting</button>
+            </bw-feature>
+        </section>
+
+        <footer class="footer">
+            <div>
+                <span>© ${() => new Date().getFullYear()} BuildWare Solutions</span>
+            </div>
+        </footer>
     </main>`;
 
 const styles = css`

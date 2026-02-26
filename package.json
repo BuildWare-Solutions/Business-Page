@@ -6,7 +6,8 @@
   "description": "BuildWare Solutions business page",
   "scripts": {
     "build": "esbuild src/app.js --bundle --format=esm --outdir=dist --sourcemap --watch",
-    "dev": "live-server src -p 8080 --no-cache --open=index.html"
+    "dev": "live-server src -p 8080 --no-cache --open=index.html",
+    "local_serv": "http-server src -p 8080 --no-cache --open=index.html"
   },
   "devDependencies": {
     "esbuild": "^0.27.3",
