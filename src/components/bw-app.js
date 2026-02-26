@@ -10,9 +10,7 @@ const NAV = [
 // TODO check and modify the template below
 const template = html`
     <bw-navbar>
-        <div slot="brand" class="brand">
-            <span>BuildWare Solutions</span>
-        </div>
+        <img slot="brand" src="../assets/logo_v2_mini.png" alt="BuildWare Solutions Logo"/>
 
         ${repeat(
                 () => NAV,

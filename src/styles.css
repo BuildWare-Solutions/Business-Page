@@ -65,9 +65,9 @@ bw-app {
 
   /* keep border always present so hover doesn't "jump" layout */
   border: 1px solid var(--bw-muted-black);
-  border-radius: 6px;
+  border-radius: 20px;
 
-  padding: 6px 8px;
+  padding: 4px 12px;
   font: inherit;
   font-weight: 650;
   cursor: pointer;

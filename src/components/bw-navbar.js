@@ -52,12 +52,15 @@ const styles = css`
     .brand {
         display: flex;
         align-items: center;
+        height: 100%;
     }
-
-    //.brand ::slotted(*) { /* as outside components are projected into the slot, addressing those external components with ::slotted */
-    //    font-weight: 650;
-    //    letter-spacing: -0.01em;
-    //}
+    /* Select the slot inside the brand classed div and then the children img from that slotted in */
+    .brand > slot::slotted(img) { /* as outside components are projected into the slot, addressing those external components with ::slotted */
+        height: calc(var(--bw-nav-h) * 0.8);
+        width: auto;
+        max-width: 100%;
+        display: block;
+    }
 
     .links {
         display: flex;
