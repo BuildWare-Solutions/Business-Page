@@ -16,7 +16,7 @@
   --bw-shadow: 0 30px 90px rgba(var(--bw-black-components), 0.2);
   --bw-shadow-soft: 0 8px 18px rgba(var(--bw-black-components), 0.1);
   --bw-radius: 10px;
-  --bw-max: 980px;
+  --bw-max-internal-containers-width: 1100px;
   --bw-nav-h: 64px;
 }
 
@@ -47,4 +47,57 @@ bw-app {
 
   border-radius: var(--bw-radius);
   box-shadow: var(--bw-shadow);
+}
+
+.bw-btn{
+  /* prevent "full-width" stretching inside a flex column */
+  display: inline-flex;
+  width: fit-content;     /* breaks flex "stretch" without align-self */
+  max-width: 100%;
+  min-width: 140px;
+  justify-content: center;
+  align-items: center;
+
+  appearance: none;
+
+  background: var(--bw-muted-black);
+  color: var(--bw-white);
+
+  /* keep border always present so hover doesn't "jump" layout */
+  border: 1px solid var(--bw-muted-black);
+  border-radius: 6px;
+
+  padding: 6px 8px;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+
+  /* subtle button shadow */
+  box-shadow: 0 2px 8px rgba(var(--bw-muted-black-components),0.14);
+
+  transition:
+          transform 120ms ease,
+          background-color 120ms ease,
+          color 120ms ease,
+          box-shadow 120ms ease;
+}
+
+/* hover: white background, black border, black text */
+.bw-btn:hover{
+  background: var(--bw-white);
+  color: var(--bw-muted-black);
+}
+
+/* pressed: light gray background, keep black border + text, subtle "press" */
+.bw-btn:active{
+  background: var(--bw-gray);
+  color: var(--bw-muted-black);
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(var(--bw-muted-black-components),0.12);
+}
+
+/* keyboard accessibility (optional but recommended) */
+.bw-btn:focus-visible{
+  outline: 2px solid var(--bw-muted-black);
+  outline-offset: 2px;
 }

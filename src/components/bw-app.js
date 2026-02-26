@@ -1,4 +1,5 @@
 import {FASTElement, html, css, repeat, when} from "@microsoft/fast-element"
+import "./bw-navbar.js";
 
 const NAV = [
     {label: "Our services", targetId: "services-intro"},
@@ -10,37 +11,34 @@ const NAV = [
 const template = html`
     <bw-navbar>
         <div slot="brand" class="brand">
-            <span class="brand-dot" aria-hidden="true"></span>
             <span>BuildWare Solutions</span>
         </div>
 
-        <div slot="links" class="nav-links">
-            ${repeat(
-                    () => NAV,
-                    html`
-                        <button class="nav-btn" @click="${(link, c) => c.parent._scrollTo(link.targetId)}">
-                            ${link => link.label}
-                        </button>
-                    `
-            )}
-        </div>
+        ${repeat(
+                () => NAV,
+                html`
+                    <button slot="links" class="bw-btn" @click="${(link, c) => c.parent._scrollTo(link.targetId)}">
+                        ${link => link.label}
+                    </button>
+                `
+        )}
     </bw-navbar>`;
 
 const styles = css``;
 
 export class BwApp extends FASTElement {
-    constructor(){
+    constructor() {
         super();
 
         this._onNavigate = (e) => {
             const targetId = e?.detail?.targetId;
-            if (typeof targetId === "string" && targetId.length){
+            if (typeof targetId === "string" && targetId.length) {
                 this._scrollTo(targetId);
             }
         };
     }
 
-    connectedCallback(){
+    connectedCallback() {
         super.connectedCallback();
 
         // Handle navigation events bubbled from bw-card components.
@@ -53,20 +51,25 @@ export class BwApp extends FASTElement {
         });
     }
 
-    disconnectedCallback(){
+    disconnectedCallback() {
         this.removeEventListener("navigate", this._onNavigate);
         super.disconnectedCallback();
     }
 
-    _scrollTo(targetId){
+    _scrollTo(targetId) {
         const root = this.shadowRoot || this; // content lives in the shadow root
         const el = root.getElementById(targetId);
         if (!el) return true;
 
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.scrollIntoView({behavior: "smooth", block: "start"});
         history.replaceState(null, "", `#${targetId}`);
         return true; // opt-out of FAST default preventDefault
     }
 }
 
-BwApp.define({ name: "bw-app", template, styles });
+BwApp.define({
+    name: "bw-app",
+    template,
+    styles,
+    shadowOptions: null
+});
