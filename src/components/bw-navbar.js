@@ -35,7 +35,7 @@ const styles = css`
     .nav {
         height: var(--bw-nav-h);
         background: var(--bw-white);
-        border-bottom: 1px solid var(--bw-border);
+        border-bottom: var(--bw-border);
     }
 
     .container {
