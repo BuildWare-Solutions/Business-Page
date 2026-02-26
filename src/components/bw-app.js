@@ -226,6 +226,7 @@ const template = html`
                                                     `
                                             )}
                                         </div>
+                                        <div slot="operating-layer"><div></div></div>
                                     </bw-feature>
                                 `
                         )}

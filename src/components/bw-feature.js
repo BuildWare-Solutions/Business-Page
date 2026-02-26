@@ -1,4 +1,4 @@
-import {FASTElement, html, css, when} from "@microsoft/fast-element";
+import {FASTElement, html, css, when, observable} from "@microsoft/fast-element";
 
 const template = html`
     <div class="color-container ${x => x.mutedBg ? "muted-background" : ""}">
@@ -20,6 +20,18 @@ const template = html`
                 ${when(x => !!x.subTitle, html`<h3 class="h3" part="subtitle">${x => x.subTitle}</h3>`)}
                 <div class="body" part="body">
                     <slot name="body"></slot>
+                </div>
+                ${when(x => x.hasOperatingLayer, html`<h3 class="h3 text-indent">Operating Layer</h3>`)}
+                <div class="body" part="operating-layer">
+                    <slot name="operating-layer" @slotchange="${(x, c) => x.handleOperatingLayerSlotChange(c.event)}"></slot>
+                </div>
+                ${when(x => x.hasOutcomes, html`<h3 class="h3 text-indent">Typical Outcomes</h3>`)}
+                <div class="body" part="typical-outcomes">
+                    <slot name="typical-outcomes" @slotchange="${(x, c) => x.handleOutcomesSlotChange(c.event)}"></slot>
+                </div>
+                ${when(x => x.hasDeliverables, html`<h3 class="h3 text-indent">Deliverables</h3>`)}
+                <div class="body" part="deliverables">
+                    <slot name="deliverables" @slotchange="${(x, c) => x.handleDeliverablesSlotChange(c.event)}"></slot>
                 </div>
             </div>
         </div>
@@ -138,6 +150,10 @@ const styles = css`
         font-weight: 650;
     }
 
+    .text-indent {
+        text-indent: 1.6rem;
+    }
+
     .body {
         color: var(--bw-subtext);
         font-size: clamp(
@@ -190,6 +206,48 @@ const styles = css`
     }
 `;
 
+function isMeaningfulNode(node) {
+    // 1) Text nodes: ignore pure whitespace
+    if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.trim().length > 0;
+    }
+
+    // 2) Not an element? (comments, etc.) -> ignore
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+        return false;
+    }
+
+    const el = /** @type {HTMLElement} */ (node);
+
+    // Ignore elements that are explicitly hidden/collapsed
+    // (optional, but usually desired)
+    if (el.hidden) return false;
+    const ariaHidden = el.getAttribute("aria-hidden");
+    if (ariaHidden === "true") return false;
+
+    // 3) Elements that are "meaningful" even without text/children
+    // (void/media-ish elements)
+    const tag = el.tagName.toLowerCase();
+    const alwaysMeaningful = new Set([
+        "img", "svg", "video", "audio", "canvas",
+        "iframe", "object", "embed",
+        "input", "textarea", "select", "button",
+        "hr", "br"
+    ]);
+    if (alwaysMeaningful.has(tag)) return true;
+
+    // 4) If element has non-whitespace text anywhere, it's meaningful
+    if (el.textContent && el.textContent.trim().length > 0) return true;
+
+    // 5) Otherwise, it’s meaningful only if it contains a meaningful descendant
+    // This makes <div><span>Hi</span></div> count, but <div></div> not count.
+    for (const child of Array.from(el.childNodes)) {
+        if (isMeaningfulNode(child)) return true;
+    }
+
+    return false;
+}
+
 export class BwFeature extends FASTElement {
     constructor() {
         super();
@@ -201,8 +259,31 @@ export class BwFeature extends FASTElement {
         this.imageRight = false;
         this.compact = false;
         this.mutedBg = false;
+
+        this.hasOperatingLayer = false;
+        this.hasOutcomes = false;
+        this.hasDeliverables = false;
+    }
+
+    handleOperatingLayerSlotChange(event) {
+        const nodes = event.target.assignedNodes({ flatten: true });
+        this.hasOperatingLayer = nodes.some(isMeaningfulNode);
+    }
+
+    handleOutcomesSlotChange(event) {
+        const nodes = event.target.assignedNodes({ flatten: true });
+        this.hasOutcomes = nodes.some(isMeaningfulNode);
+    }
+
+    handleDeliverablesSlotChange(event) {
+        const nodes = event.target.assignedNodes({ flatten: true });
+        this.hasDeliverables = nodes.some(isMeaningfulNode);
     }
 }
+
+observable(BwFeature.prototype, "hasOperatingLayer");
+observable(BwFeature.prototype, "hasOutcomes");
+observable(BwFeature.prototype, "hasDeliverables");
 
 BwFeature.define({
     name: "bw-feature",
