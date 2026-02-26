@@ -338,7 +338,14 @@ const template = html`
                     <p class="contact-line">Location: Australia (remote-first)</p>
                 </div>
 
-                <button class="bw-btn" slot="body">Book a Technical Scoping Meeting</button>
+                <a
+                        class="bw-btn"
+                        slot="body"
+                        href="https://forms.gle/axJaKkUYp9Mv3DpM8"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                >Book a Technical Scoping Meeting
+                </a>
             </bw-feature>
         </section>
 
@@ -352,7 +359,12 @@ const template = html`
 const styles = css`
     .page {
         display: block;
-    }`;
+    }
+
+    .bw-btn {
+        text-decoration: none;
+    }
+`;
 
 export class BwApp extends FASTElement {
     constructor() {
