@@ -1,6 +1,11 @@
-import {FASTElement, html, css, repeat} from "@microsoft/fast-element"
+import {FASTElement, html, css, repeat} from "@microsoft/fast-element";
 import "./bw-navbar.js";
 import "./bw-feature.js";
+import "./bw-card-grid.js";
+import "./bw-card.js"
+import {adoptBwBtnStyles} from "./bw-btn-styles.js";
+
+adoptBwBtnStyles(document);
 
 const NAV = [
     {label: "Our services", targetId: "services-intro"},
@@ -13,21 +18,21 @@ const SERVICE_CARDS = [
         title: "Systems Bridging & Control",
         subtitle: "Domain A",
         description: "Bridge incompatible systems safely—API/SDK, middleware, DB, protocol, or physical layer.",
-        img: "./assets/service-systems.svg",
+        img: "../assets/_A_systems_bridging_and_control-mini.png",
         targetId: "domain-systems"
     },
     {
         title: "Peripheral Interconnection",
         subtitle: "Domain B",
         description: "Integrate specialized peripherals via protocol gateways, adapters, and controlled interfaces.",
-        img: "./assets/service-peripheral.svg",
+        img: "../assets/_B_peripheral_interconnection-mini.png",
         targetId: "domain-peripheral"
     },
     {
         title: "Configuration, Estimation & Aided Design Tools",
         subtitle: "Domain C",
         description: "Make complex systems clear—estimators, configurators, validation and BOQ outputs.",
-        img: "./assets/service-config.svg",
+        img: "../assets/_C_estimators_service-mini.png",
         targetId: "domain-config"
     }
 ];
@@ -80,14 +85,13 @@ const template = html`
                 </div>
             </bw-feature>
 
-            <bw-card-grid cols="3" class="stack-space">
+            <bw-card-grid cols="3">
                 ${repeat(
                         () => SERVICE_CARDS,
                         html`
                             <bw-card
                                     img-src="${s => s.img}"
                                     img-alt="${s => s.title}"
-                                    subtitle="${s => s.subtitle}"
                                     title="${s => s.title}"
                                     description="${s => s.description}"
                                     button-label="Learn more"

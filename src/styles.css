@@ -1,115 +1,63 @@
 /* Global page shell (components handle most styling inside Shadow DOM) */
 :root {
-  --bw-white: #ffffff;
-  --bw-white-components: 255, 255, 255;
-  --bw-gray: #DCDCDC;
-  --bw-gray-components: 220, 220, 220;
-  --bw-muted-gray: #FAFAFA;
-  --bw-muted-gray-components: 250, 250, 250;
-  --bw-black: #000000;
-  --bw-black-components: 0, 0, 0;
-  --bw-muted-black: #1C1C1C;
-  --bw-muted-black-components: 28, 28, 28;
-  --bw-text: var(--bw-black);
-  --bw-subtext: var(--bw-muted-black);
-  --bw-border: 1px solid rgba(var(--bw-muted-black-components), 0.10);
-  --bw-shadow: 0 30px 90px rgba(var(--bw-black-components), 0.2);
-  --bw-shadow-soft: 0 10px 12px rgba(var(--bw-black-components), 0.15);
-  --bw-radius: 10px;
-  --bw-max-internal-containers-width: 1100px;
-  --bw-nav-h: 64px;
+    --bw-white: #ffffff;
+    --bw-white-components: 255, 255, 255;
+    --bw-gray: #DCDCDC;
+    --bw-gray-components: 220, 220, 220;
+    --bw-muted-gray: #FAFAFA;
+    --bw-muted-gray-components: 250, 250, 250;
+    --bw-black: #000000;
+    --bw-black-components: 0, 0, 0;
+    --bw-muted-black: #1C1C1C;
+    --bw-muted-black-components: 28, 28, 28;
+    --bw-text: var(--bw-black);
+    --bw-subtext: var(--bw-muted-black);
+    --bw-border: 1px solid rgba(var(--bw-muted-black-components), 0.10);
+    --bw-shadow: 0 30px 90px rgba(var(--bw-black-components), 0.2);
+    --bw-shadow-soft: 0 10px 12px rgba(var(--bw-black-components), 0.15);
+    --bw-radius: 10px;
+    --bw-max-internal-containers-width: 1100px;
+    --bw-nav-h: 64px;
 
-  --bw-feature-img-std-height: 500px;
-  --bw-feature-img-ratio-no: 4.5fr;
-  --bw-feature-content-ratio-no: 5.5fr;
-  --bw-feature-h1-scale: 1;
-  --bw-feature-h2-scale: 1;
-  --bw-feature-body-scale: 1.2;
-  --bw-feature-type-scale: 1;
+    --bw-feature-img-std-height: 500px;
+    --bw-feature-img-ratio-no: 4.5fr;
+    --bw-feature-content-ratio-no: 5.5fr;
+    --bw-feature-h1-scale: 1;
+    --bw-feature-h2-scale: 1;
+    --bw-feature-body-scale: 1.2;
+    --bw-feature-type-scale: 1;
 }
 
 /*For any set width -> width = content + padding + border*/
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /*Smooths navigation to #section or element.scrollIntoView*/
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  color: var(--bw-text);
-  background: var(--bw-gray);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    margin: 0;
+    color: var(--bw-text);
+    background: var(--bw-gray);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 bw-app {
-  display: block;
-  max-width: 1200px;
-  margin: 28px auto; /* top bottom 28, auto l/r*/
-  background: var(--bw-white);
-  color: var(--bw-text);
-  min-height: 100vh;
+    display: block;
+    max-width: 1200px;
+    margin: 28px auto; /* top bottom 28, auto l/r*/
+    background: var(--bw-white);
+    color: var(--bw-text);
+    min-height: 100vh;
 
-  border-radius: var(--bw-radius);
-  box-shadow: var(--bw-shadow);
+    border-radius: var(--bw-radius);
+    box-shadow: var(--bw-shadow);
 }
 
-.bw-btn{
-  /* prevent "full-width" stretching inside a flex column */
-  display: inline-flex;
-  width: fit-content;     /* breaks flex "stretch" without align-self */
-  max-width: 100%;
-  min-width: 140px;
-  justify-content: center;
-  align-items: center;
-
-  appearance: none;
-
-  background: var(--bw-muted-black);
-  color: var(--bw-white);
-
-  /* keep border always present so hover doesn't "jump" layout */
-  border: 1px solid var(--bw-muted-black);
-  border-radius: 20px;
-
-  padding: 4px 12px;
-  font: inherit;
-  font-weight: 650;
-  cursor: pointer;
-
-  /* subtle button shadow */
-  box-shadow: 0 2px 8px rgba(var(--bw-muted-black-components),0.14);
-
-  transition:
-          transform 120ms ease,
-          background-color 120ms ease,
-          color 120ms ease,
-          box-shadow 120ms ease;
-}
-
-/* hover: white background, black border, black text */
-.bw-btn:hover{
-  background: var(--bw-white);
-  color: var(--bw-muted-black);
-}
-
-/* pressed: light gray background, keep black border + text, subtle "press" */
-.bw-btn:active{
-  background: var(--bw-gray);
-  color: var(--bw-muted-black);
-  transform: translateY(1px);
-  box-shadow: 0 1px 4px rgba(var(--bw-muted-black-components),0.12);
-}
-
-/* keyboard accessibility (optional but recommended) */
-.bw-btn:focus-visible{
-  outline: 2px solid var(--bw-muted-black);
-  outline-offset: 2px;
-}
 
 bw-feature [slot="body"] p {
-  text-indent: 1.6em;
+    text-indent: 1.6em;
 }
