@@ -42,6 +42,7 @@ bw-app {
   max-width: 1200px;
   margin: 28px auto; /* top bottom 28, auto l/r*/
   background: var(--bw-white);
+  color: var(--bw-text);
   min-height: 100vh;
 
   border-radius: var(--bw-radius);

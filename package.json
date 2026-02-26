@@ -5,12 +5,15 @@
   "type": "module",
   "description": "BuildWare Solutions business page",
   "scripts": {
-    "dev": "live-server . -p 8080 -c-1",
-    "serve": "http-server . -p 8080 -c-1",
-    "dev:live": "live-server --port=8080 --no-browser"
+    "build": "esbuild src/app.js --bundle --format=esm --outdir=dist --sourcemap --watch",
+    "dev": "live-server src -p 8080 --no-cache --open=index.html"
   },
   "devDependencies": {
+    "esbuild": "^0.27.3",
     "http-server": "^14.1.1",
     "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "@microsoft/fast-element": "^2.10.0"
   }
 }
