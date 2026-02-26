@@ -193,7 +193,7 @@ const template = html`
                         API/SDK extensions, integration middleware, and protocol gateways for enterprise and
                         mission-critical environments.</p>
                     <p> Our capabilities are grouped into three domains covering integration from platform logic to edge
-                        devices and specialized design tooling. </p>
+                        devices and specialized design tooling.</p>
                 </div>
             </bw-feature>
 
@@ -298,7 +298,7 @@ const template = html`
             >
             </bw-feature>
 
-            <bw-card-grid cols="5">
+            <bw-card-grid cols="4">
                 ${repeat(
                         () => INDUSTRIES,
                         html`
