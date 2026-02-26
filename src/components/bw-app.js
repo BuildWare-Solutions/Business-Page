@@ -48,11 +48,15 @@ const DOMAINS = [
                 title: "Custom Adapter Layer",
                 subtitle: "API/SDK extensions",
                 img: "./assets/domain-adapter.svg",
-                paragraphs: [
-                    "Extend or wrap existing interfaces with a supportable adapter layer.",
-                    "We isolate vendor quirks, normalize data, and provide a clean integration surface."
-                ],
-                bullets: ["Version-safe integration", "Clear ownership boundaries", "Controlled failure modes"]
+                body: {
+                    paragraphs: [
+                        "Extend or wrap existing interfaces with a supportable adapter layer.",
+                        "We isolate vendor quirks, normalize data, and provide a clean integration surface."
+                    ]
+                },
+                operating_layer: {},
+                typical_outcomes: {},
+                deliverables: {bullets: ["Version-safe integration", "Clear ownership boundaries", "Controlled failure modes"]}
             },
             {
                 title: "Legacy Modernisation Bridge",
@@ -215,18 +219,54 @@ const template = html`
                                             muted-bg=${b => b.muted}
                                     >
                                         <div slot="body">
-                                            ${repeat(b => b.paragraphs, html`<p>${p => p}</p>`)}
+                                            ${repeat(b => b.body?.paragraphs || [], html`<p>${p => p}</p>`)}
                                             ${when(
-                                                    b => Array.isArray(b.bullets) && b.bullets.length > 0,
+                                                    b => Array.isArray(b.body?.bullets) && b.body?.bullets.length > 0,
                                                     html`
                                                         <ul>
-                                                            ${repeat(b => b.bullets, html`
+                                                            ${repeat(b => b.body.bullets, html`
                                                                 <li>${x => x}</li>`)}
                                                         </ul>
                                                     `
                                             )}
                                         </div>
-                                        <div slot="operating-layer"><div></div></div>
+                                        <div slot="operating-layer">
+                                            ${repeat(b => b.operating_layer?.paragraphs || [], html`<p>${p => p}</p>`)}
+                                            ${when(
+                                                    b => Array.isArray(b.operating_layer?.bullets) && b.operating_layer?.bullets.length > 0,
+                                                    html`
+                                                        <ul>
+                                                            ${repeat(b => b.operating_layer.bullets, html`
+                                                                <li>${x => x}</li>`)}
+                                                        </ul>
+                                                    `
+                                            )}
+                                        </div>
+                                        <div slot="typical-outcomes">
+                                            ${repeat(b => b.typical_outcomes?.paragraphs || [], html`<p>${p => p}</p>`)}
+                                            ${when(
+                                                    b => Array.isArray(b.typical_outcomes?.bullets) && b.typical_outcomes?.bullets.length > 0,
+                                                    html`
+                                                        <ul>
+                                                            ${repeat(b => b.typical_outcomes.bullets, html`
+                                                                <li>${x => x}</li>`)}
+                                                        </ul>
+                                                    `
+                                            )}
+                                        </div>
+                                        <div slot="deliverables">
+                                            ${repeat(b => b.deliverables?.paragraphs || [], html`<p>${p => p}</p>`)}
+                                            ${when(
+                                                    b => Array.isArray(b.deliverables?.bullets) && b.deliverables?.bullets.length > 0,
+                                                    html`
+                                                        <ul>
+                                                            ${repeat(b => b.deliverables.bullets, html`
+                                                                <li>${x => x}</li>`)}
+                                                        </ul>
+                                                    `
+                                            )}
+                                        </div>
+
                                     </bw-feature>
                                 `
                         )}
