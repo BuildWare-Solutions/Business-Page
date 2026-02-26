@@ -17,21 +17,21 @@ const SERVICE_CARDS = [
     {
         title: "Systems Bridging & Control",
         subtitle: "Domain A",
-        description: "Bridge incompatible systems safely—API/SDK, middleware, DB, protocol, or physical layer.",
+        description: "API/SDK-driven middleware that connects modern and legacy platforms, turning events into governed workflows and safe command/control.",
         img: "../assets/_A_systems_bridging_and_control-mini.png",
         targetId: "domain-systems"
     },
     {
         title: "Peripheral Interconnection",
         subtitle: "Domain B",
-        description: "Integrate specialized peripherals via protocol gateways, adapters, and controlled interfaces.",
+        description: "Edge gateways that onboard specialised devices by translating protocols—and when needed, physical signalling—so non-native peripherals appear as native  controlled endpoints.",
         img: "../assets/_B_peripheral_interconnection-mini.png",
         targetId: "domain-peripheral"
     },
     {
         title: "Configuration, Estimation & Aided Design Tools",
         subtitle: "Domain C",
-        description: "Make complex systems clear—estimators, configurators, validation and BOQ outputs.",
+        description: "Lifecycle engineering tools that guide configuration and enforce constraints from pre-quote to commissioning.",
         img: "../assets/_C_estimators_service-mini.png",
         targetId: "domain-config"
     }
@@ -45,38 +45,31 @@ const DOMAINS = [
         muted: true,
         blocks: [
             {
-                title: "Custom Adapter Layer",
-                subtitle: "API/SDK extensions",
-                img: "./assets/domain-adapter.svg",
-                body: {
-                    paragraphs: [
-                        "Extend or wrap existing interfaces with a supportable adapter layer.",
-                        "We isolate vendor quirks, normalize data, and provide a clean integration surface."
-                    ]
-                },
-                operating_layer: {},
-                typical_outcomes: {},
-                deliverables: {bullets: ["Version-safe integration", "Clear ownership boundaries", "Controlled failure modes"]}
+                title: "Custom Behavior Layer",
+                subtitle: "API/SDK Extensions",
+                img: "../assets/A.1.2-mini.png",
+                body: {paragraphs: ["Add an API/SDK control layer that turns platform events into governed workflows, capturing critical data and enforcing compliant actions beyond default logic."]},
+                operating_layer: {paragraphs: ["API/SDK interface tier-integrating directly with vendor-supported endpoints, events, and control surfaces."]},
+                typical_outcomes: {bullets: ["Workflow automation", "Rule enforcement", "Data extraction", "Operator tooling aligned to regulated processes"]},
+                deliverables: {bullets: ["Integration modules", "Business-logic layer", "Optional lightweight GUI", "Audit logs", "Documentation"]}
             },
             {
-                title: "Legacy Modernisation Bridge",
-                subtitle: "near → target",
-                img: "./assets/domain-legacy.svg",
-                paragraphs: [
-                    "Upgrade ageing workflows without ripping out the whole stack.",
-                    "We bridge legacy protocols and data structures into a modern control plane."
-                ],
-                bullets: ["Incremental migration", "Auditability & logging", "Minimise downtime risk"]
+                title: "Legacy Modernization Bridge",
+                subtitle: "New - Legacy",
+                img: "../assets/A2.2-mini.png",
+                body: {paragraphs: ["Extend the life of legacy assets while enabling modern platform rollouts, avoiding rip-and-replace cost and disruption."]},
+                operating_layer: {paragraphs: ["Middleware bridge between the modern platform and legacy estate, API-API where available or DB-API where legacy integration is schema-led (including analysis / reverse engineering when required)."]},
+                typical_outcomes: {bullets: ["Unified operational control", "Staged migration", "Continuity without downtime"]},
+                deliverables: {bullets: ["Middleware service", "Adapters/connectors", "Mapping & translation layer", "Validation suite", "Deployment and handover package"]}
             },
             {
-                title: "Cross‑Platform Integration",
-                subtitle: "system ↔ integration platform",
-                img: "./assets/domain-platform.svg",
-                paragraphs: [
-                    "Connect building ecosystems to integration platforms using well-defined contracts.",
-                    "We design safe coupling points for data and control across environments."
-                ],
-                bullets: ["Contract-driven interfaces", "Back-pressure & retries", "Operational monitoring"]
+                title: "Cross-Platform Integration",
+                subtitle: "System-System | System-Enterprise Platform",
+                img: "../assets/A3.2-mini.png",
+                body: {paragraphs: ["Enable controlled interoperability between platforms-across disciplines or into enterprise workflow systems."]},
+                operating_layer: {paragraphs: ["API-API integration layer with explicit contracts for data exchange, command/control, safety constraints, and failure handling."]},
+                typical_outcomes: {bullets: ["Cross-system optimisation (e.g., occupancy-driven HVAC)", "Compliance-enabling automation", "Operational visibility"]},
+                deliverables: {bullets: ["Integration service", "Canonical data model", "Policy/constraint layer (fail-safe behaviour)", "Observability and audit logs."]}
             }
         ]
     },
@@ -87,23 +80,21 @@ const DOMAINS = [
         blocks: [
             {
                 title: "Protocol Gateway",
-                subtitle: "same physical layer, different protocol",
-                img: "./assets/domain-gateway.svg",
-                paragraphs: [
-                    "Translate between protocols while keeping the physical interface stable.",
-                    "Ideal for integrating specialist devices that don’t speak your main stack’s language."
-                ],
-                bullets: ["Deterministic translation", "Health checks & diagnostics", "Field-friendly deployment"]
+                subtitle: "Same physical layer, different protocol",
+                img: "../assets/B.1.2-mini.png",
+                body: {paragraphs: ["Integrate specialized peripherals through protocol-to-protocol translation over a shared physical interface (network/BUS)."]},
+                operating_layer: {paragraphs: ["Inline gateway presenting the peripheral as a native device via packet translation, payloads normalization and command/event mapping over interfaces like RS-485/IP/CAN/SPI/RS-232."]},
+                typical_outcomes: {bullets: ["Enable mission-critical peripherals (e.g., advanced biometrics) without core platform replacement", "Onboard industry-specific automation (robots, conveyors, specialised sensors) as native inputs to support optimisation and compliance workflows"]},
+                deliverables: {bullets: ["Protocol analysis report", "Gateway firmware", "Test vectors", "Point/command mapping", "Integration and commissioning guide"]}
             },
             {
-                title: "Device Adapter",
-                subtitle: "peripheral → normalized interface",
-                img: "./assets/domain-device.svg",
-                paragraphs: [
-                    "Standardise peripheral behaviours into a consistent API or message contract.",
-                    "We handle timing, retries, and edge cases so your core system stays clean."
-                ],
-                bullets: ["Testable boundaries", "Operational telemetry", "Graceful degradation"]
+                title: "Signal & Protocol Gateway ",
+                subtitle: "Different physical & protocol layer",
+                img: "../assets/B.2.2-mini.png",
+                body: {paragraphs: ["Integrate specialised peripherals by translating both physical signalling and protocols (using reverse engineering where required) to bridge otherwise incompatible interfaces."]},
+                operating_layer: {paragraphs: ["Edge gateway performing signal conversion and protocol translation to present the device as a native endpoint."]},
+                typical_outcomes: {paragraphs: ["Integration of non-standard or high-value devices within a controlled, supportable architecture."]},
+                deliverables: {bullets: ["Physical layer characterisation", "Hardware design (if required)", "Gateway firmware", "Validation test cases", "Point/command mapping", "Integration & commissioning guide"]}
             }
         ]
     },
@@ -113,14 +104,18 @@ const DOMAINS = [
         muted: true,
         blocks: [
             {
-                title: "Configurator & Estimation Tools",
-                subtitle: "solution engineering enablement",
-                img: "./assets/domain-estimator.svg",
-                paragraphs: [
-                    "Enable high-confidence solution engineering by making complex systems clear.",
-                    "Guide configuration, validate constraints, and generate BOQ/topology outputs."
-                ],
-                bullets: ["Improve design accuracy", "Prevent expensive rework", "Faster commissioning"]
+                title: "Configurators & Estimation Tools",
+                subtitle: "Solution engineering enablement",
+                img: "../assets/C.1-mini.png",
+                body: {paragraphs: ["Enable high-confidence solution engineering by making complex systems clear. Guiding configuration and validating constraints from pre-quote through commissioning and change."]},
+                operating_layer: {paragraphs: ["Lifecycle engineering toolset used from early estimation and quote development through commissioning and ongoing modifications, maintaining a validated model of the solution and generating configuration/BOQ outputs as the project evolves."]},
+                typical_outcomes: {
+                    bullets: ["Improve design accuracy and cost control through guided configuration and clear solution visibility",
+                        "Prevent expensive rework by exposing constraints and design errors early—before procurement and commissioning",
+                        "Accelerate commissioning and reduce variation risk with validated configurations and predictable system behavior",
+                        "Simplify later changes by re-validating impact against the maintained solution model"]
+                },
+                deliverables: {bullets: ["Configurator GUI", "Rules/constraints engine", "BOQ/topology outputs", "Validation reports", "Training & handover"]}
             }
         ]
     }
@@ -161,25 +156,31 @@ const template = html`
                     muted-bg
             >
                 <div slot="body">
-                    <p>Bring us the workflow. We’ll scope the integration.</p>
-                    <p>
-                        Enterprise building ecosystems require careful scoping before integration begins.
-                        We review the operational workflow, assess interfaces and constraints across the stack,
-                        and identify likely failure modes—then select the right layer (API/SDK, middleware,
-                        database, protocol, or physical) and define a safe, supportable path to delivery.
-                    </p>
+                    <p>Our vision is building technology that feels effortless by turning siloed systems into an
+                        interoperable ecosystem.</p>
+                    <p>We partner with systems integrators and vendors to deliver API/SDK extensions, integration
+                        middleware, and protocol gateways for enterprise and mission-critical environments.</p>
+                    <ul>
+                        <li>Unify control across new & legacy systems</li>
+                        <li>Integrate required peripherals when vendor support falls short</li>
+                        <li>Automate building operations to align with enterprise governance and compliance workflows
+                        </li>
+                    </ul>
                 </div>
             </bw-feature>
         </section>
 
         <!-- OUR SERVICES: INTRO -->
         <section id="services-intro">
-            <bw-feature large-title="Our services">
+            <bw-feature
+                    large-title="Our services"
+                    medium-title="Turning “effortless” into reality starts with bridging the right layer.">
                 <div slot="body">
-                    <p>
-                        We integrate across the full stack: from device protocols and control networks,
-                        through middleware and data, up to clean APIs and operational tooling.
-                    </p>
+                    <p>Depending on where the constraint sits (API/SDK, middleware, database, or protocol) we deliver
+                        API/SDK extensions, integration middleware, and protocol gateways for enterprise and
+                        mission-critical environments.</p>
+                    <p> Our capabilities are grouped into three domains covering integration from platform logic to edge
+                        devices and specialized design tooling. </p>
                 </div>
             </bw-feature>
 
@@ -218,54 +219,52 @@ const template = html`
                                             ?image-right=${b => b.imageRight}
                                             muted-bg=${b => b.muted}
                                     >
-                                        <div slot="body">
-                                            ${repeat(b => b.body?.paragraphs || [], html`<p>${p => p}</p>`)}
-                                            ${when(
-                                                    b => Array.isArray(b.body?.bullets) && b.body?.bullets.length > 0,
-                                                    html`
-                                                        <ul>
-                                                            ${repeat(b => b.body.bullets, html`
-                                                                <li>${x => x}</li>`)}
-                                                        </ul>
-                                                    `
-                                            )}
-                                        </div>
-                                        <div slot="operating-layer">
-                                            ${repeat(b => b.operating_layer?.paragraphs || [], html`<p>${p => p}</p>`)}
-                                            ${when(
-                                                    b => Array.isArray(b.operating_layer?.bullets) && b.operating_layer?.bullets.length > 0,
-                                                    html`
-                                                        <ul>
-                                                            ${repeat(b => b.operating_layer.bullets, html`
-                                                                <li>${x => x}</li>`)}
-                                                        </ul>
-                                                    `
-                                            )}
-                                        </div>
-                                        <div slot="typical-outcomes">
-                                            ${repeat(b => b.typical_outcomes?.paragraphs || [], html`<p>${p => p}</p>`)}
-                                            ${when(
-                                                    b => Array.isArray(b.typical_outcomes?.bullets) && b.typical_outcomes?.bullets.length > 0,
-                                                    html`
-                                                        <ul>
-                                                            ${repeat(b => b.typical_outcomes.bullets, html`
-                                                                <li>${x => x}</li>`)}
-                                                        </ul>
-                                                    `
-                                            )}
-                                        </div>
-                                        <div slot="deliverables">
-                                            ${repeat(b => b.deliverables?.paragraphs || [], html`<p>${p => p}</p>`)}
-                                            ${when(
-                                                    b => Array.isArray(b.deliverables?.bullets) && b.deliverables?.bullets.length > 0,
-                                                    html`
-                                                        <ul>
-                                                            ${repeat(b => b.deliverables.bullets, html`
-                                                                <li>${x => x}</li>`)}
-                                                        </ul>
-                                                    `
-                                            )}
-                                        </div>
+                                        ${repeat(b => b.body?.paragraphs || [], html`<p slot="body">${p => p}</p>`)}
+                                        ${when(
+                                                b => Array.isArray(b.body?.bullets) && b.body?.bullets.length > 0,
+                                                html`
+                                                    <ul slot="body">
+                                                        ${repeat(b => b.body.bullets, html`
+                                                            <li>${x => x}</li>`)}
+                                                    </ul>
+                                                `
+                                        )}
+
+                                        ${repeat(b => b.operating_layer?.paragraphs || [], html`<p
+                                                slot="operating-layer">${p => p}</p>`)}
+                                        ${when(
+                                                b => Array.isArray(b.operating_layer?.bullets) && b.operating_layer?.bullets.length > 0,
+                                                html`
+                                                    <ul slot="operating-layer">
+                                                        ${repeat(b => b.operating_layer.bullets, html`
+                                                            <li>${x => x}</li>`)}
+                                                    </ul>
+                                                `
+                                        )}
+
+                                        ${repeat(b => b.typical_outcomes?.paragraphs || [], html`<p
+                                                slot="typical-outcomes">${p => p}</p>`)}
+                                        ${when(
+                                                b => Array.isArray(b.typical_outcomes?.bullets) && b.typical_outcomes?.bullets.length > 0,
+                                                html`
+                                                    <ul slot="typical-outcomes">
+                                                        ${repeat(b => b.typical_outcomes.bullets, html`
+                                                            <li>${x => x}</li>`)}
+                                                    </ul>
+                                                `
+                                        )}
+
+                                        ${repeat(b => b.deliverables?.paragraphs || [], html`<p slot="deliverables">
+                                            ${p => p}</p>`)}
+                                        ${when(
+                                                b => Array.isArray(b.deliverables?.bullets) && b.deliverables?.bullets.length > 0,
+                                                html`
+                                                    <ul slot="deliverables">
+                                                        ${repeat(b => b.deliverables.bullets, html`
+                                                            <li>${x => x}</li>`)}
+                                                    </ul>
+                                                `
+                                        )}
 
                                     </bw-feature>
                                 `

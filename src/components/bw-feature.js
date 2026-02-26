@@ -157,9 +157,9 @@ const styles = css`
     .body {
         color: var(--bw-subtext);
         font-size: clamp(
-                calc(14px * var(--bw-feature-type-scale) * var(--bw-feature-body-scale)),
-                calc(1.1vw * var(--bw-feature-type-scale) * var(--bw-feature-body-scale)),
-                calc(16px * var(--bw-feature-type-scale) * var(--bw-feature-body-scale))
+                calc(12px * var(--bw-feature-type-scale) * var(--bw-feature-body-scale)),
+                calc(1vw * var(--bw-feature-type-scale) * var(--bw-feature-body-scale)),
+                calc(14px * var(--bw-feature-type-scale) * var(--bw-feature-body-scale))
         );
         line-height: 1.6;
 
@@ -178,7 +178,7 @@ const styles = css`
     }
 
     .body ::slotted(ul) {
-        margin: 0;
+        margin: 0 0 12px 0;
         padding-left: 18px;
     }
 
