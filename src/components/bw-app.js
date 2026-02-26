@@ -122,16 +122,22 @@ const DOMAINS = [
 ];
 
 const INDUSTRIES = [
-    { title: "Pharmaceutical & life sciences (clean rooms, validated processes)", img: "../assets/industries/pharma.png" },
-    { title: "Data centers & critical commercial facilities", img: "../assets/industries/datacenter.png" },
-    { title: "Healthcare & hospital campuses", img: "../assets/industries/hospital.png" },
-    { title: "Airports & transport infrastructure", img: "../assets/industries/airport.png" },
-    { title: "Financial services & regulated enterprises (auditability, controlled workflows)", img: "../assets/industries/financial.png" },
-    { title: "Security-sensitive enterprise environments", img: "../assets/industries/security.png" },
-    { title: "Industrial sites with strict compliance workflows", img: "../assets/industries/industrial.png" },
-    { title: "Large commercial real estate & multi-site campuses", img: "../assets/industries/commercial.png" },
-    { title: "Manufacturing & logistics facilities", img: "../assets/industries/logistic.png" },
-    { title: "Retail and distribution complexes", img: "../assets/industries/retail.png" },
+    {
+        title: "Pharmaceutical & life sciences (clean rooms, validated processes)",
+        img: "../assets/industries/pharma.png"
+    },
+    {title: "Data centers & critical commercial facilities", img: "../assets/industries/datacenter.png"},
+    {title: "Healthcare & hospital campuses", img: "../assets/industries/hospital.png"},
+    {title: "Airports & transport infrastructure", img: "../assets/industries/airport.png"},
+    {
+        title: "Financial services & regulated enterprises (auditability, controlled workflows)",
+        img: "../assets/industries/financial.png"
+    },
+    {title: "Security-sensitive enterprise environments", img: "../assets/industries/security.png"},
+    {title: "Industrial sites with strict compliance workflows", img: "../assets/industries/industrial.png"},
+    {title: "Large commercial real estate & multi-site campuses", img: "../assets/industries/commercial.png"},
+    {title: "Manufacturing & logistics facilities", img: "../assets/industries/logistic.png"},
+    {title: "Retail and distribution complexes", img: "../assets/industries/retail.png"},
 ];
 
 const DOMAINS_VIEW = DOMAINS.map(d => ({
@@ -401,9 +407,16 @@ export class BwApp extends FASTElement {
         const el = root.querySelector(`#${CSS.escape(targetId)}`);
         if (!el) return true;
 
-        el.scrollIntoView({behavior: "smooth", block: "start"});
+        // Measure the current rendered navbar height (works even when it grows on mobile)
+        const nav = root.querySelector("bw-navbar");
+        const navH = nav ? nav.getBoundingClientRect().height : 0;
+
+        // Scroll so the section top lands right under the navbar
+        const y = el.getBoundingClientRect().top + window.scrollY - navH ;
+
+        window.scrollTo({top: Math.max(0, y), behavior: "smooth"});
         history.replaceState(null, "", `#${targetId}`);
-        return true; // opt-out of FAST default preventDefault
+        return true;
     }
 }
 
