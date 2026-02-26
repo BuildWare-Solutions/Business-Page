@@ -1,0 +1,16 @@
+{
+  "name": "buildware-fast-spa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "BuildWare Solutions business page",
+  "scripts": {
+    "dev": "live-server . -p 8080 -c-1",
+    "serve": "http-server . -p 8080 -c-1",
+    "dev:live": "live-server --port=8080 --no-browser"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}

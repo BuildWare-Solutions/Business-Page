@@ -1,0 +1,49 @@
+/* Global page shell (components handle most styling inside Shadow DOM) */
+:root {
+  --bw-white: #ffffff;
+  --bw-white-components: 255, 255, 255;
+  --bw-gray: #DCDCDC;
+  --bw-gray-components: 220, 220, 220;
+  --bw-muted-gray: #FAFAFA;
+  --bw-muted-gray-components: 250, 250, 250;
+  --bw-black: #000000;
+  --bw-black-components: 0, 0, 0;
+  --bw-muted-black: #1C1C1C;
+  --bw-muted-black-components: 28, 28, 28;
+  --bw-text: var(--bw-black);
+  --bw-subtext: var(--bw-muted-black);
+  --bw-border: rgba(var(--bw-muted-black-components), 0.10);
+  --bw-shadow: 0 30px 90px rgba(var(--bw-black-components), 0.2);
+  --bw-shadow-soft: 0 8px 18px rgba(var(--bw-black-components), 0.1);
+  --bw-radius: 10px;
+  --bw-max: 980px;
+  --bw-nav-h: 64px;
+}
+
+/*For any set width -> width = content + padding + border*/
+* {
+  box-sizing: border-box;
+}
+
+/*Smooths navigation to #section or element.scrollIntoView*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--bw-text);
+  background: var(--bw-gray);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+bw-app {
+  display: block;
+  max-width: 1200px;
+  margin: 28px auto; /* top bottom 28, auto l/r*/
+  background: var(--bw-white);
+  min-height: 100vh;
+
+  border-radius: var(--bw-radius);
+  box-shadow: var(--bw-shadow);
+}
