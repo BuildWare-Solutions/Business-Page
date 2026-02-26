@@ -1,4 +1,4 @@
-import {FASTElement, html, css, repeat} from "@microsoft/fast-element";
+import {FASTElement, html, css, repeat, when} from "@microsoft/fast-element";
 import "./bw-navbar.js";
 import "./bw-feature.js";
 import "./bw-card-grid.js";
@@ -36,6 +36,100 @@ const SERVICE_CARDS = [
         targetId: "domain-config"
     }
 ];
+
+// Each domain contains multiple reusable BwFeature blocks (alternating image placement)
+const DOMAINS = [
+    {
+        id: "domain-systems",
+        sectionTitle: "Systems Bridging & Control",
+        muted: true,
+        blocks: [
+            {
+                title: "Custom Adapter Layer",
+                subtitle: "API/SDK extensions",
+                img: "./assets/domain-adapter.svg",
+                paragraphs: [
+                    "Extend or wrap existing interfaces with a supportable adapter layer.",
+                    "We isolate vendor quirks, normalize data, and provide a clean integration surface."
+                ],
+                bullets: ["Version-safe integration", "Clear ownership boundaries", "Controlled failure modes"]
+            },
+            {
+                title: "Legacy Modernisation Bridge",
+                subtitle: "near → target",
+                img: "./assets/domain-legacy.svg",
+                paragraphs: [
+                    "Upgrade ageing workflows without ripping out the whole stack.",
+                    "We bridge legacy protocols and data structures into a modern control plane."
+                ],
+                bullets: ["Incremental migration", "Auditability & logging", "Minimise downtime risk"]
+            },
+            {
+                title: "Cross‑Platform Integration",
+                subtitle: "system ↔ integration platform",
+                img: "./assets/domain-platform.svg",
+                paragraphs: [
+                    "Connect building ecosystems to integration platforms using well-defined contracts.",
+                    "We design safe coupling points for data and control across environments."
+                ],
+                bullets: ["Contract-driven interfaces", "Back-pressure & retries", "Operational monitoring"]
+            }
+        ]
+    },
+    {
+        id: "domain-peripheral",
+        sectionTitle: "Peripheral Interconnection",
+        muted: false,
+        blocks: [
+            {
+                title: "Protocol Gateway",
+                subtitle: "same physical layer, different protocol",
+                img: "./assets/domain-gateway.svg",
+                paragraphs: [
+                    "Translate between protocols while keeping the physical interface stable.",
+                    "Ideal for integrating specialist devices that don’t speak your main stack’s language."
+                ],
+                bullets: ["Deterministic translation", "Health checks & diagnostics", "Field-friendly deployment"]
+            },
+            {
+                title: "Device Adapter",
+                subtitle: "peripheral → normalized interface",
+                img: "./assets/domain-device.svg",
+                paragraphs: [
+                    "Standardise peripheral behaviours into a consistent API or message contract.",
+                    "We handle timing, retries, and edge cases so your core system stays clean."
+                ],
+                bullets: ["Testable boundaries", "Operational telemetry", "Graceful degradation"]
+            }
+        ]
+    },
+    {
+        id: "domain-config",
+        sectionTitle: "Configuration, Estimation & Aided Design Tools",
+        muted: true,
+        blocks: [
+            {
+                title: "Configurator & Estimation Tools",
+                subtitle: "solution engineering enablement",
+                img: "./assets/domain-estimator.svg",
+                paragraphs: [
+                    "Enable high-confidence solution engineering by making complex systems clear.",
+                    "Guide configuration, validate constraints, and generate BOQ/topology outputs."
+                ],
+                bullets: ["Improve design accuracy", "Prevent expensive rework", "Faster commissioning"]
+            }
+        ]
+    }
+];
+
+const DOMAINS_VIEW = DOMAINS.map(d => ({
+    ...d,
+    blocks: d.blocks.map((b, i) => ({
+        ...b,
+        muted: d.muted,              // carry parent muted down
+        imageRight: i % 2 === 1      // compute alternation here (no c.index needed)
+    }))
+}));
 
 const template = html`
     <bw-navbar>
@@ -101,6 +195,43 @@ const template = html`
                 )}
             </bw-card-grid>
         </section>
+
+        <!-- SERVICE DOMAINS -->
+        ${repeat(
+                () => DOMAINS_VIEW,
+                html`
+                    <section id="${d => d.id}">
+                        <bw-feature medium-title=${d => d.sectionTitle} muted-bg=${d => d.muted}>
+                        </bw-feature>
+                        ${repeat(
+                                d => d.blocks,
+                                html`
+                                    <bw-feature
+                                            img-src="${b => b.img}"
+                                            img-alt="${b => b.title}"
+                                            medium-title="${b => b.title}"
+                                            subtitle="${b => b.subtitle}"
+                                            ?image-right=${b => b.imageRight}
+                                            muted-bg=${b => b.muted}
+                                    >
+                                        <div slot="body">
+                                            ${repeat(b => b.paragraphs, html`<p>${p => p}</p>`)}
+                                            ${when(
+                                                    b => Array.isArray(b.bullets) && b.bullets.length > 0,
+                                                    html`
+                                                        <ul>
+                                                            ${repeat(b => b.bullets, html`
+                                                                <li>${x => x}</li>`)}
+                                                        </ul>
+                                                    `
+                                            )}
+                                        </div>
+                                    </bw-feature>
+                                `
+                        )}
+                    </section>
+                `
+        )}
     </main>`;
 
 const styles = css`

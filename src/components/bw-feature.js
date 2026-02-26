@@ -17,6 +17,7 @@ const template = html`
             <div class="content" part="content">
                 ${when(x => !!x.largeTitle, html`<h1 class="h1" part="large-title">${x => x.largeTitle}</h1>`)}
                 ${when(x => !!x.mediumTitle, html`<h2 class="h2" part="medium-title">${x => x.mediumTitle}</h2>`)}
+                ${when(x => !!x.subTitle, html`<h3 class="h3" part="subtitle">${x => x.subTitle}</h3>`)}
                 <div class="body" part="body">
                     <slot name="body"></slot>
                 </div>
@@ -125,6 +126,18 @@ const styles = css`
         font-weight: 650;
     }
 
+    .h3 {
+        font-size: clamp(
+                calc(14px * var(--bw-feature-type-scale) * var(--bw-feature-h2-scale)),
+                calc(1.5vw * var(--bw-feature-type-scale) * var(--bw-feature-h2-scale)),
+                calc(18px * var(--bw-feature-type-scale) * var(--bw-feature-h2-scale))
+        );
+        line-height: 1.25;
+        margin: 0 0 14px 0;
+        color: var(--bw-subtext);
+        font-weight: 650;
+    }
+
     .body {
         color: var(--bw-subtext);
         font-size: clamp(
@@ -184,6 +197,7 @@ export class BwFeature extends FASTElement {
         this.imgAlt = "";
         this.largeTitle = "";
         this.mediumTitle = "";
+        this.subTitle = "";
         this.imageRight = false;
         this.compact = false;
         this.mutedBg = false;
@@ -199,6 +213,7 @@ BwFeature.define({
         {attribute: "img-alt", property: "imgAlt"},
         {attribute: "large-title", property: "largeTitle"},
         {attribute: "medium-title", property: "mediumTitle"},
+        {attribute: "subtitle", property: "subTitle"},
         {attribute: "image-right", property: "imageRight", mode: "boolean"},
         {attribute: "compact", property: "compact", mode: "boolean"},
         {attribute: "muted-bg", property: "mutedBg", mode: "boolean"},
