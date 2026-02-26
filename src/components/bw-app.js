@@ -8,6 +8,30 @@ const NAV = [
     {label: "Contact", targetId: "contact"}
 ];
 
+const SERVICE_CARDS = [
+    {
+        title: "Systems Bridging & Control",
+        subtitle: "Domain A",
+        description: "Bridge incompatible systems safely—API/SDK, middleware, DB, protocol, or physical layer.",
+        img: "./assets/service-systems.svg",
+        targetId: "domain-systems"
+    },
+    {
+        title: "Peripheral Interconnection",
+        subtitle: "Domain B",
+        description: "Integrate specialized peripherals via protocol gateways, adapters, and controlled interfaces.",
+        img: "./assets/service-peripheral.svg",
+        targetId: "domain-peripheral"
+    },
+    {
+        title: "Configuration, Estimation & Aided Design Tools",
+        subtitle: "Domain C",
+        description: "Make complex systems clear—estimators, configurators, validation and BOQ outputs.",
+        img: "./assets/service-config.svg",
+        targetId: "domain-config"
+    }
+];
+
 const template = html`
     <bw-navbar>
         <img slot="brand" src="../assets/logo_v2_mini.png" alt="BuildWare Solutions Logo"/>
@@ -31,6 +55,7 @@ const template = html`
                     large-title="Integration Engineering"
                     medium-title="Enterprise and Mission Critical Building Automation"
                     image-right
+                    muted-bg
             >
                 <div slot="body">
                     <p>Bring us the workflow. We’ll scope the integration.</p>
@@ -42,6 +67,35 @@ const template = html`
                     </p>
                 </div>
             </bw-feature>
+        </section>
+
+        <!-- OUR SERVICES: INTRO -->
+        <section id="services-intro">
+            <bw-feature large-title="Our services">
+                <div slot="body">
+                    <p>
+                        We integrate across the full stack: from device protocols and control networks,
+                        through middleware and data, up to clean APIs and operational tooling.
+                    </p>
+                </div>
+            </bw-feature>
+
+            <bw-card-grid cols="3" class="stack-space">
+                ${repeat(
+                        () => SERVICE_CARDS,
+                        html`
+                            <bw-card
+                                    img-src="${s => s.img}"
+                                    img-alt="${s => s.title}"
+                                    subtitle="${s => s.subtitle}"
+                                    title="${s => s.title}"
+                                    description="${s => s.description}"
+                                    button-label="Learn more"
+                                    target-id="${s => s.targetId}"
+                            ></bw-card>
+                        `
+                )}
+            </bw-card-grid>
         </section>
     </main>`;
 
@@ -82,7 +136,7 @@ export class BwApp extends FASTElement {
 
     _scrollTo(targetId) {
         const root = this.shadowRoot || this; // content lives in the shadow root
-        const el = root.getElementById(targetId);
+        const el = root.querySelector(`#${CSS.escape(targetId)}`);
         if (!el) return true;
 
         el.scrollIntoView({behavior: "smooth", block: "start"});

@@ -1,23 +1,25 @@
 import {FASTElement, html, css, when} from "@microsoft/fast-element";
 
 const template = html`
-    <div class="container ${x => x.imgSrc ? "has-media" : "no-media"} ${x => x.compact ? "compact" : ""} ${x => x.imageRight ? "right" : "left"}"">
-        ${when(
-                x => !!x.imgSrc,
-                html`
-                    <figure class="media" part="media">
-                        <img class="img"
-                             src="${x => x.imgSrc}"
-                             alt="${x => x.imgAlt || ""}"
-                             loading="lazy"/>
-                    </figure>
-                `
-        )}
-        <div class="content" part="content">
-            ${when(x => !!x.largeTitle, html`<h1 class="h1" part="large-title">${x => x.largeTitle}</h1>`)}
-            ${when(x => !!x.mediumTitle, html`<h2 class="h2" part="medium-title">${x => x.mediumTitle}</h2>`)}
-            <div class="body" part="body">
-                <slot name="body"></slot>
+    <div class="color-container ${x => x.mutedBg ? "muted-background" : ""}">
+        <div class="container ${x => x.imgSrc ? "has-media" : "no-media"} ${x => x.compact ? "compact" : ""} ${x => x.imageRight ? "right" : "left"}">
+            ${when(
+                    x => !!x.imgSrc,
+                    html`
+                        <figure class="media" part="media">
+                            <img class="img"
+                                 src="${x => x.imgSrc}"
+                                 alt="${x => x.imgAlt || ""}"
+                                 loading="lazy"/>
+                        </figure>
+                    `
+            )}
+            <div class="content" part="content">
+                ${when(x => !!x.largeTitle, html`<h1 class="h1" part="large-title">${x => x.largeTitle}</h1>`)}
+                ${when(x => !!x.mediumTitle, html`<h2 class="h2" part="medium-title">${x => x.mediumTitle}</h2>`)}
+                <div class="body" part="body">
+                    <slot name="body"></slot>
+                </div>
             </div>
         </div>
     </div>
@@ -26,6 +28,10 @@ const template = html`
 const styles = css`
     :host {
         display: block;
+    }
+
+    .color-container.muted-background {
+        background: var(--bw-gray);
     }
 
     .container {
@@ -171,6 +177,7 @@ export class BwFeature extends FASTElement {
         this.mediumTitle = "";
         this.imageRight = false;
         this.compact = false;
+        this.mutedBg = false;
     }
 }
 
@@ -185,5 +192,6 @@ BwFeature.define({
         {attribute: "medium-title", property: "mediumTitle"},
         {attribute: "image-right", property: "imageRight", mode: "boolean"},
         {attribute: "compact", property: "compact", mode: "boolean"},
+        {attribute: "muted-bg", property: "mutedBg", mode: "boolean"},
     ],
 });
