@@ -1,0 +1,1 @@
+import "./components/bw-app.js";
