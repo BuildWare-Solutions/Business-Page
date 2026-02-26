@@ -133,10 +133,19 @@ const styles = css`
                 calc(16px * var(--bw-feature-type-scale) * var(--bw-feature-body-scale))
         );
         line-height: 1.6;
+
+        text-align: justify;
+        text-align-last: left;
+        hyphens: auto;
+    }
+
+    .body ::slotted(*) {
+        text-align: inherit;
     }
 
     .body ::slotted(p) {
         margin: 0 0 12px 0;
+        text-indent: 1.6rem;
     }
 
     .body ::slotted(ul) {

@@ -14,7 +14,7 @@
   --bw-subtext: var(--bw-muted-black);
   --bw-border: 1px solid rgba(var(--bw-muted-black-components), 0.10);
   --bw-shadow: 0 30px 90px rgba(var(--bw-black-components), 0.2);
-  --bw-shadow-soft: 0 8px 18px rgba(var(--bw-black-components), 0.15);
+  --bw-shadow-soft: 0 10px 12px rgba(var(--bw-black-components), 0.15);
   --bw-radius: 10px;
   --bw-max-internal-containers-width: 1100px;
   --bw-nav-h: 64px;
@@ -108,4 +108,8 @@ bw-app {
 .bw-btn:focus-visible{
   outline: 2px solid var(--bw-muted-black);
   outline-offset: 2px;
+}
+
+bw-feature [slot="body"] p {
+  text-indent: 1.6em;
 }
