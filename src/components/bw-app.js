@@ -1,4 +1,4 @@
-import {FASTElement, html, css, repeat, when} from "@microsoft/fast-element"
+import {FASTElement, html, css, repeat} from "@microsoft/fast-element"
 import "./bw-navbar.js";
 
 const NAV = [

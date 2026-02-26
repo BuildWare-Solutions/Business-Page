@@ -90,5 +90,4 @@ BwNavbar.define({
     name: "bw-navbar",
     template,
     styles,
-    // shadowOptions: null
 });
