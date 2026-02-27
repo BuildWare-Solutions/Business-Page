@@ -7,6 +7,28 @@ import {adoptBwBtnStyles} from "./bw-btn-styles.js";
 
 adoptBwBtnStyles(document);
 
+const _b64 = (...parts) => parts.join("");
+const _dec = (b64) => atob(b64);
+
+// Split strings so you don't have a single obvious token in the source
+const _CONTACT = {
+    to_mail: _b64("bWFpb", "HRvOg=="),
+    address: _b64("Y29udGFjdEBidWlsZ", "HdhcmVzb2x1dGlvbnMuY29t"),
+    subj: _b64("QnVpbGRXYXJl", "IFNvbHV0aW9ucyBlbnF1aXJ5")
+};
+
+function buildMailtoUrl() {
+    const mailto = _dec(_CONTACT.to_mail);
+    const email = _dec(_CONTACT.address);
+
+    const params = new URLSearchParams();
+    const subj = _dec(_CONTACT.subj);
+    if (subj) params.set("subject", subj);
+
+    const q = params.toString();
+    return `${mailto}${email}${q ? `?${q}` : ""}`;
+}
+
 const NAV = [
     {label: "Our services", targetId: "services-intro"},
     {label: "Who we support", targetId: "support-intro"},
@@ -337,21 +359,20 @@ const template = html`
                     <li>select the right layer (API/SDK, middleware, database, protocol, or physical)</li>
                     <li>define a safe, supportable path to delivery</li>
                 </ul>
-
-                <div class="contact-box">
-                    <div class="contact-title">Contact</div>
-                    <p class="contact-line">Email: <span class="mono">hello@buildwaresolutions.example</span></p>
-                    <p class="contact-line">Location: Australia (remote-first)</p>
-                </div>
-
-                <a
-                        class="bw-btn"
-                        slot="body"
-                        href="https://forms.gle/axJaKkUYp9Mv3DpM8"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                >Book a Technical Scoping Meeting
-                </a>
+                <p slot="body">
+                    <button class="bw-btn bw-btn--scoping" @click="${(x, c) => x._contactUs(c.event)}">Book a Technical Scoping
+                        Meeting
+                    </button>
+                </p>
+                <p slot="body">
+                    <a
+                            class="bw-btn bw-btn--scoping"
+                            href="https://forms.gle/axJaKkUYp9Mv3DpM8"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                    >Prefer contact by Google Form ?
+                    </a>
+                </p>
             </bw-feature>
         </section>
 
@@ -367,8 +388,17 @@ const styles = css`
         display: block;
     }
 
-    .bw-btn {
+    .bw-btn--scoping {
+        width: 285px;
+        display: inline-flex;
+        align-items: center; 
+        justify-content: center; 
+        margin: 0 auto;
+        text-align: center;
+        line-height: 1;
+        box-sizing: border-box;
         text-decoration: none;
+        font-size:15px;
     }
 `;
 
@@ -382,6 +412,12 @@ export class BwApp extends FASTElement {
                 this._scrollTo(targetId);
             }
         };
+    }
+
+    _contactUs(evt) {
+        evt?.stopPropagation?.();
+        window.location.href = buildMailtoUrl();
+        return true;
     }
 
     connectedCallback() {
@@ -412,7 +448,7 @@ export class BwApp extends FASTElement {
         const navH = nav ? nav.getBoundingClientRect().height : 0;
 
         // Scroll so the section top lands right under the navbar
-        const y = el.getBoundingClientRect().top + window.scrollY - navH ;
+        const y = el.getBoundingClientRect().top + window.scrollY - navH;
 
         window.scrollTo({top: Math.max(0, y), behavior: "smooth"});
         history.replaceState(null, "", `#${targetId}`);
