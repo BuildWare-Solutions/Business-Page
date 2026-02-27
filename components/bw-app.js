@@ -18,21 +18,21 @@ const SERVICE_CARDS = [
         title: "Systems Bridging & Control",
         subtitle: "Domain A",
         description: "API/SDK-driven middleware that connects modern and legacy platforms, turning events into governed workflows and safe command/control.",
-        img: "../assets/_A_systems_bridging_and_control-mini.png",
+        img: "../assets/domain-systems-bridging-and-control-mini.png",
         targetId: "domain-systems"
     },
     {
         title: "Peripheral Interconnection",
         subtitle: "Domain B",
         description: "Edge gateways that onboard specialised devices by translating protocols—and when needed, physical signalling—so non-native peripherals appear as native  controlled endpoints.",
-        img: "../assets/_B_peripheral_interconnection-mini.png",
+        img: "../assets/domain-peripheral-interconnection-mini.png",
         targetId: "domain-peripheral"
     },
     {
         title: "Configuration, Estimation & Aided Design Tools",
         subtitle: "Domain C",
         description: "Lifecycle engineering tools that guide configuration and enforce constraints from pre-quote to commissioning.",
-        img: "../assets/_C_estimators_service-mini.png",
+        img: "../assets/domain-estimators-service-mini.png",
         targetId: "domain-config"
     }
 ];
